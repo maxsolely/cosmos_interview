@@ -26,7 +26,7 @@ export function ModalGenerate() {
   const response = await fetch('https://api.thenextleg.io/v2/imagine', {
    method: 'POST',
    headers: {
-    Authorization: 'Bearer <your-token>',
+    Authorization: 'Bearer <your api key>',
     'Content-Type': 'application/json'
    },
    body: requestData
@@ -44,7 +44,12 @@ export function ModalGenerate() {
   while (!jobIsDone) {
    try {
     const progressRequest = await fetch(
-     `https://api.thenextleg.io/v2/message/${messageId}?expireMins=5`
+     `https://api.thenextleg.io/v2/message/${messageId}?expireMins=5`,
+     {
+      headers: {
+       Authorization: 'Bearer <your api key>'
+      }
+     }
     );
     const progressData = await progressRequest.json();
     const { progress } = progressData;
