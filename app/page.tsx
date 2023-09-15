@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 import { getClient } from '../apollo-client';
-import ImageModal from '@/components/ImageModal';
+import ImageModal from '@/components/Modal/ImageModal';
 import { PostObject } from '@/utils/types';
 import ImageMasonry from '@/components/ImageMasonry';
 

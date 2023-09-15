@@ -12,16 +12,23 @@ export default function ContextWrapper({ children }: ContextWrapperProps) {
  const [modalImage, setModalImage] = useState<CosmosImage | null>(null);
  const [modalTags, setModalTags] = useState<string[]>([]);
  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+ const [selectedModalTags, setSelectedModalTags] = useState<string[]>([]);
  const defaultTags = ['wood', 'interior design', 'art', 'sky'];
 
- const selectTag = (tag: string) => {
-  setSelectedTags((prev) => [...prev, tag]);
+ const selectTag = (tag: string, appOrModal: 'app' | 'modal') => {
+  appOrModal === 'app'
+   ? setSelectedTags((prev) => [...prev, tag])
+   : setSelectedModalTags((prev) => [...prev, tag]);
  };
 
- const removeTag = (tag: string) => {
-  setSelectedTags((prevSelectedTags) => {
-   return prevSelectedTags.filter((t) => t !== tag);
-  });
+ const removeTag = (tag: string, appOrModal: 'app' | 'modal') => {
+  appOrModal === 'app'
+   ? setSelectedTags((prevSelectedTags) => {
+      return prevSelectedTags.filter((t) => t !== tag);
+     })
+   : setSelectedModalTags((prevSelectedTags) => {
+      return prevSelectedTags.filter((t) => t !== tag);
+     });
  };
 
  const openModal = (image: CosmosImage, tags: string[]) => {
@@ -34,6 +41,7 @@ export default function ContextWrapper({ children }: ContextWrapperProps) {
   setIsModalOpen(false);
   setModalImage(null);
   setModalTags([]);
+  setSelectedModalTags([]);
  };
 
  return (
@@ -47,7 +55,8 @@ export default function ContextWrapper({ children }: ContextWrapperProps) {
     selectTag,
     removeTag,
     selectedTags,
-    defaultTags
+    defaultTags,
+    selectedModalTags
    }}
   >
    {children}

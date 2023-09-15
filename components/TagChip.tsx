@@ -5,12 +5,14 @@ interface ChipProps {
  label: string;
  selected: boolean;
  disableOnClick: boolean;
+ tagType: 'app' | 'modal';
 }
 
 export default function TagChip({
  label,
  selected,
- disableOnClick = false
+ disableOnClick = false,
+ tagType = 'app'
 }: ChipProps) {
  const { selectTag, removeTag } = useAppContext();
 
@@ -37,9 +39,9 @@ export default function TagChip({
   return (event) => {
    if (disableOnClick) return;
    if (selected) {
-    removeTag(label);
+    removeTag(label, tagType);
    } else {
-    selectTag(label);
+    selectTag(label, tagType);
    }
   };
  };

@@ -13,6 +13,7 @@ export default function TagsContianer() {
       label={label}
       selected={selectedTags.indexOf(label) >= 0}
       disableOnClick={false}
+      tagType="app"
      />
     ))}
    </div>

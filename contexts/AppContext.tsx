@@ -2,27 +2,29 @@
 import { CosmosImage } from '@/utils/types';
 import { useContext, createContext } from 'react';
 
-interface GifContextProps {
+interface AppContextProps {
  isModalOpen: boolean;
  modalImage: CosmosImage | null;
  modalTags: string[];
  openModal: (image: CosmosImage, tags: string[]) => void;
  closeModal: () => void;
- selectTag: (tag: string) => void;
- removeTag: (tag: string) => void;
+ selectTag: (tag: string, appOrModal: 'app' | 'modal') => void;
+ removeTag: (tag: string, appOrModal: 'app' | 'modal') => void;
  selectedTags: string[];
  defaultTags: string[];
+ selectedModalTags: string[];
 }
 
-const AppContext = createContext<GifContextProps>({
+const AppContext = createContext<AppContextProps>({
  isModalOpen: false,
  modalImage: null,
  modalTags: [],
  openModal: (image, tags) => {},
  closeModal: () => {},
  selectedTags: [],
- selectTag: (tag) => {},
- removeTag: (tag) => {},
+ selectedModalTags: [],
+ selectTag: (tag, appOrModal) => {},
+ removeTag: (tag, appOrModal) => {},
  defaultTags: ['wood', 'interior design', 'art', 'sky']
 });
 
